@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 @Slf4j
-public class OrderDomainServiceImpl implements OrderDomainService{
+public class OrderDomainServiceImpl implements OrderDomainService {
 
     public static final String UTC = "UTC";
 
@@ -55,7 +55,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     }
 
     private void validateRestaurant(Restaurant restaurant) {
-        if(!restaurant.isActive()) {
+        if (!restaurant.isActive()) {
             throw new OrderDomainException("Restaurant with id : " + restaurant.getId().getValue()
                     + " is currently not active");
         }
@@ -65,7 +65,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     private void setOrderProductInformation(Order order, Restaurant restaurant) {
         order.getItems().forEach(orderItem -> restaurant.getProducts().forEach(restaurantProduct -> {
             Product currentProduct = orderItem.getProduct();
-            if(currentProduct.equals(restaurantProduct)) {
+            if (currentProduct.equals(restaurantProduct)) {
                 currentProduct.updateWithConfirmedNameAndPrice(restaurantProduct.getName(),
                         restaurantProduct.getPrice());
             }
